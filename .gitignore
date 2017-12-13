@@ -22,4 +22,5 @@ yarn-error.log*
 
 .idea/
 .vscode/
-
+*.css
+!spec/*.css
