@@ -9,7 +9,6 @@ class Util {
                 resolve(response);
             });
         } catch (error) {
-            console.error('[SimpleRequest]', error);
             return new Promise((resolve, reject) => {
                 reject(error);
             });

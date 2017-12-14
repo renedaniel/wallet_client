@@ -24,7 +24,7 @@ class RequestManager {
             throw response;
         }
         catch (e) {
-            console.log('[XHR ERROR]', e);
+            console.error('[XHR ERROR]', e, request.parseErrors(e));
             return new Promise((resolve, reject) => {
                 reject(request.parseErrors(e))
             })

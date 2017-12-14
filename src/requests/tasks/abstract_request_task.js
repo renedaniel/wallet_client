@@ -8,7 +8,7 @@ class AbstractRequestTask {
     }
 
     isValid(response) {
-        return response.status == 200
+        return response.status === 200
     }
 
     parseErrors(response) {

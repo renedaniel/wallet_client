@@ -1,8 +1,6 @@
 import './styles/register.css';
 import React, { Component } from 'react';
 import RegisterTask from './../../requests/tasks/register_task';
-import Request from './../../requests/request_manager';
-import Validator from './../../utils/validator';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
 

@@ -1,9 +1,11 @@
 import './index.css';
+import 'normalize.css';
+import 'typeface-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store';
 import { Provider } from 'react-redux';
-import App from './App';
+import App from './containers/app/app_container';
 import registerServiceWorker from './registerServiceWorker';
 
 import { loadInitApis } from './requests/loader';
