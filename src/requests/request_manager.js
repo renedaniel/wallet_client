@@ -15,9 +15,10 @@ class RequestManager {
         try {
             const response = await promise;
             console.log('[RESPONSE]', response);
-            if (request.isValid(response.data)) {
+            const data = response.data;
+            if (request.isValid(data)) {
                 return new Promise((resolve, reject) => {
-                    resolve(response.data);
+                    resolve(data.response);
                 });
             }
             throw response;

@@ -1,5 +1,4 @@
 import AbstractRequestTask from "./abstract_request_task";
-import config from "./../../config/app_config";
 
 class RegisterTask extends AbstractRequestTask {
 
@@ -14,7 +13,7 @@ class RegisterTask extends AbstractRequestTask {
     }
 
     getUrl() {
-        return `${config.end_point}/${config.api_version}/users`;
+        return `${this.end_point}/${this.api_version}/users`;
     }
 
     getMethod(){

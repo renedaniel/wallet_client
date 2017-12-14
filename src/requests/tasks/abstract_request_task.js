@@ -1,12 +1,18 @@
+import config from "./../../config/app_config";
 
 class AbstractRequestTask {
 
-    isValid(response) {
-        return true;
+    constructor(params) {
+        this.end_point = config.end_point;
+        this.api_version = config.api_version;
     }
 
-    parseErrors(data) {
-        return data;
+    isValid(response) {
+        return response.status == 200
+    }
+
+    parseErrors(response) {
+        return response && response.data && response.data.errors || {}
     }
 
     getParams() {
