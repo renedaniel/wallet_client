@@ -1,13 +1,27 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 class Nav extends PureComponent {
 
-    renderNavItem(label, to, className = '') {
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
+
+    logout(e) {
+        e.preventDefault();
+        localStorage.clear();
+        window.location = '/';
+    }
+
+    renderNavItem(label, to = '/', className = '', onClick = () => { }) {
         return (
             <NavLink
+                key={label}
                 className={`nav-item ${className}`}
                 to={to}
+                onClick={onClick}
             >
                 {label}
             </NavLink>
@@ -15,14 +29,27 @@ class Nav extends PureComponent {
     }
 
     render() {
+        const options = [];
+        if (this.props.user.is_logged) {
+            options.push(this.renderNavItem('Cerrar sesión', '', '', this.logout));
+        } else {
+            options.push(this.renderNavItem('Registro', '/singup'));
+            options.push(this.renderNavItem('Iniciar sesión', '/login'));
+        }
         return (
             <nav className="nav">
-                {this.renderNavItem('Registro', '/singup')}
-                {this.renderNavItem('Login', '/login')}
+                {options}
             </nav>
         );
     }
 }
 
-export default Nav;
+Nav.propTypes = {
+    user: PropTypes.object
+}
 
+Nav.defaultProps = {
+    user: {}
+}
+
+export default Nav;
