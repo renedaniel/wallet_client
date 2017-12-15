@@ -3,11 +3,12 @@ import axios from 'axios';
 class RequestManager {
 
     static async addRequest(request) {
-
+        
         const promise = axios({
             method: request.getMethod(),
             url: request.getUrl(),
-            data: request.getParams()
+            data: request.getParams(),
+            headers: request.getHeaders()
         });
 
         console.log('[REQUEST]', request, promise);

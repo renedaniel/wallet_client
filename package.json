@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "history": "^4.7.2",
+    "jsencrypt": "^2.3.1",
     "node-sass-chokidar": "0.0.3",
     "normalize.css": "^7.0.0",
     "npm-run-all": "^4.1.2",

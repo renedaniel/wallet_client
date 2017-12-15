@@ -12,6 +12,7 @@ import Register from './../../components/user/register_component';
 import Login from './../../components/user/login_component';
 import Nav from './../../components/nav_component';
 import Footer from './../../components/footer_component';
+import UserPanel from './../../components/panel/user_panel_component';
 //Actions
 import { fetchIsLoggedIn } from './../../actions/user_action';
 
@@ -39,6 +40,10 @@ class App extends Component {
                         <h1 className="app-title">My Wallet</h1>
                     </header>
                     <Nav user={this.props.user} />
+                    {
+                        this.props.user.is_logged &&
+                        <UserPanel user={this.props.user} />
+                    }
                     <Route path="/singup" component={Register} />
                     <Route path="/login" component={Login} />
                     <Footer />
