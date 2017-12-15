@@ -27,7 +27,10 @@ class Register extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await Util.performSimpleRequest(RegisterTask, this.state.form_data);
+            const request = {
+                user: this.state.form_data
+            }
+            const response = await Util.performSimpleRequest(RegisterTask, request);
         } catch (errors) {
             this.setState({ errors });
         }
