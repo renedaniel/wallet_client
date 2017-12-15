@@ -1,21 +1,18 @@
-import './styles/register.css';
+//import './styles/Login.css';
 import React, { Component } from 'react';
-import RegisterTask from './../../requests/tasks/register_task';
+import LoginTask from './../../requests/tasks/login_task';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
 
-class Register extends Component {
+class Login extends Component {
 
     constructor(params) {
         super(params);
 
         this.state = {
             form_data: {
-                first_name: '',
-                last_name: '',
                 email: '',
                 password: '',
-                password_confirmation: ''
             },
             errors: {}
         }
@@ -27,10 +24,10 @@ class Register extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         try {
-            const request = {
-                user: this.state.form_data
-            }
-            const response = await Util.performSimpleRequest(RegisterTask, request);
+            const auth = this.state.form_data
+            const response = await Util.performSimpleRequest(LoginTask, { auth });
+            localStorage.setItem("jwt", response.jwt);
+            window.location = '/register';
         } catch (errors) {
             this.setState({ errors });
         }
@@ -55,14 +52,11 @@ class Register extends Component {
 
     render() {
         return (
-            <div className='register'>
-                <h1>Registro</h1>
+            <div className='Login'>
+                <h1>Login</h1>
                 <form onSubmit={this.handleSubmit} className="form">
-                    {this.renderInput('first_name')}
-                    {this.renderInput('last_name')}
                     {this.renderInput('email')}
                     {this.renderInput('password', 'password')}
-                    {this.renderInput('password_confirmation', 'password')}
                     <button>Enviar</button>
                 </form>
             </div>
@@ -70,4 +64,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default Login;

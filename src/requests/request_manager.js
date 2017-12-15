@@ -15,15 +15,15 @@ class RequestManager {
         try {
             const response = await promise;
             console.log('[RESPONSE]', response);
-            if (request.isValid(response.data)) {
+            if (request.isValid(response)) {
                 return new Promise((resolve, reject) => {
-                    resolve(response.data);
+                    resolve(request.getResponse(response));
                 });
             }
             throw response;
         }
         catch (e) {
-            console.log('[XHR ERROR]', e);
+            console.error('[XHR ERROR]', e, request.parseErrors(e));
             return new Promise((resolve, reject) => {
                 reject(request.parseErrors(e))
             })

@@ -1,8 +1,24 @@
+import './index.css';
+import 'normalize.css';
+import 'typeface-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import store from './store';
+import { Provider } from 'react-redux';
+import App from './containers/app/app_container';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { loadInitApis } from './requests/loader';
+
+async function ready() {
+    await loadInitApis();
+    ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+        document.getElementById('root')
+    );
+}
+
+ready();
 registerServiceWorker();
