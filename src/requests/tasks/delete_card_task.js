@@ -1,6 +1,6 @@
 import SecureRequestTask from "./secure_request_task";
 
-class AddCardTask extends SecureRequestTask {
+class DeleteCardTask extends SecureRequestTask {
 
     constructor(params) {
         super(params);
@@ -8,7 +8,7 @@ class AddCardTask extends SecureRequestTask {
     }
 
     getUrl() {
-        return `${this.end_point}/${this.api_version}/cards`;
+        return `${this.end_point}/${this.api_version}/cards/${this.custom_params.card_id}`;
     }
 
     getParams() {
@@ -16,6 +16,10 @@ class AddCardTask extends SecureRequestTask {
         return Object.assign({}, params, this.custom_params);
     }
 
+    getMethod() {
+        return 'DELETE';
+    }
+
 }
 
-export default AddCardTask;
+export default DeleteCardTask;

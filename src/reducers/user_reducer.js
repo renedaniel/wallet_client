@@ -3,7 +3,8 @@ import {
     RECEIVE_ANONYMOUS
 } from './../actions/user_action';
 import {
-    RECEIVE_CARD
+    RECEIVE_CARD,
+    DELETE_CARD
 } from './../actions/card_action';
 
 function reducer(state = null, action = {}) {
@@ -15,6 +16,10 @@ function reducer(state = null, action = {}) {
         case RECEIVE_CARD:
             state.cards = [...state.cards, action.card]
             return { ...state };
+        case DELETE_CARD:
+            const filter = state.cards.filter(card => card.id !== action.card_id);
+            state.cards = state.cards.filter(card => card.id !== action.card_id)
+            return { ...state }
         default:
             return state;
     }
