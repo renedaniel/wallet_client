@@ -1,21 +1,21 @@
-import './styles/register.css';
 import React, { Component } from 'react';
-import RegisterTask from './../../requests/tasks/register_task';
+import { connect } from 'react-redux';
+import CardTask from './../../requests/tasks/add_card_task';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
+import { receiveCard } from './../../actions/card_action';
 
-class Register extends Component {
+class AddCard extends Component {
 
     constructor(params) {
         super(params);
 
         this.state = {
             form_data: {
-                first_name: '',
-                last_name: '',
-                email: '',
-                password: '',
-                password_confirmation: ''
+                card_number: '',
+                full_name: '',
+                expiration: '',
+                cvc: ''
             },
             errors: {}
         }
@@ -27,12 +27,9 @@ class Register extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         try {
-            const request = {
-                user: {
-                    ...this.state.form_data
-                }
-            }
-            const response = await Util.performSimpleRequest(RegisterTask, request);
+            const card = Util.encryptObject(this.state.form_data);
+            const response = await Util.performSimpleRequest(CardTask, { card });
+            this.props.dispatch(receiveCard(response));
         } catch (errors) {
             this.setState({ errors });
         }
@@ -49,11 +46,11 @@ class Register extends Component {
         const error = this.state.errors[key] && this.state.errors[key][0] || false;
         return (
             <div>
-                <input 
-                    type={type} 
-                    id={`${key}`} 
-                    onChange={this.handleChange} 
-                    value={this.state.form_data[key]}  
+                <input
+                    type={type}
+                    id={`${key}`}
+                    onChange={this.handleChange}
+                    value={this.state.form_data[key]}
                     placeholder={Translator.get(`register_placeholder_${key}`)}
                 />
                 {error && <span>{Translator.get(error)} </span>}
@@ -63,14 +60,13 @@ class Register extends Component {
 
     render() {
         return (
-            <div className='register'>
-                <h1>Registro</h1>
+            <div className='panel panel-add-card'>
+                <h1>Agrega tarjeta</h1>
                 <form onSubmit={this.handleSubmit} className="form">
-                    {this.renderInput('first_name')}
-                    {this.renderInput('last_name')}
-                    {this.renderInput('email')}
-                    {this.renderInput('password', 'password')}
-                    {this.renderInput('password_confirmation', 'password')}
+                    {this.renderInput('card_number')}
+                    {this.renderInput('full_name')}
+                    {this.renderInput('expiration')}
+                    {this.renderInput('cvc', 'password')}
                     <button>Enviar</button>
                 </form>
             </div>
@@ -78,4 +74,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default connect()(AddCard);
