@@ -13,6 +13,8 @@ import Login from './../../components/user/login_component';
 import Nav from './../../components/nav_component';
 import Footer from './../../components/footer_component';
 import UserPanel from './../../components/panel/user_panel_component';
+import ModalContainer from './../modal/modal_container';
+import Spinner from './../spinner/spinner_container';
 //Actions
 import { fetchIsLoggedIn } from './../../actions/user_action';
 
@@ -47,6 +49,8 @@ class App extends Component {
                     <Route path="/singup" component={Register} />
                     <Route path="/login" component={Login} />
                     <Footer />
+                    <ModalContainer />
+                    <Spinner />
                 </div>
             </Router>
         );
