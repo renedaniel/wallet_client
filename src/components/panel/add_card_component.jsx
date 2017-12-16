@@ -45,7 +45,7 @@ class AddCard extends Component {
     renderInput(key, type = 'text') {
         const error = this.state.errors[key] && this.state.errors[key][0] || false;
         return (
-            <div>
+            <div className={`form-group ${error ? 'error' : ''}`}>
                 <input
                     type={type}
                     id={`${key}`}
@@ -53,7 +53,7 @@ class AddCard extends Component {
                     value={this.state.form_data[key]}
                     placeholder={Translator.get(`register_placeholder_${key}`)}
                 />
-                {error && <span>{Translator.get(error)} </span>}
+                {error && <span className="error">{Translator.get(error)} </span>}
             </div>
         );
     }
@@ -67,7 +67,7 @@ class AddCard extends Component {
                     {this.renderInput('full_name')}
                     {this.renderInput('expiration')}
                     {this.renderInput('cvc', 'password')}
-                    <button>Enviar</button>
+                    <button className="button button-info">Enviar</button>
                 </form>
             </div>
         )

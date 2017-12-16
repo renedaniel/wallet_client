@@ -1,26 +1,77 @@
 $margin-card: 15px;
+$margin-bottom : 10px;
+$blue-color: #0070ba;
 .user-panel {
+    position: relative;
+    font-weight: bold;
+    .small-info{
+        color: #6c7378;
+        font-weight: normal;
+        font-size: 15px;
+    }
     > * {
         display: inline-block;
     }
-    background: gray;
     .left-side {
         width: 30%;
     }
     .right-side {
+        position: absolute;
+        top: 0px;
         width: calc(70%);
     }
-    .card {
-        background: yellow;
-        .links * {
-            display: block;
+    @media screen and (max-width: 600px) {
+        .left-side {
             width: 100%;
-            color: blue;
-            cursor: pointer;
+        }
+        .right-side {
+            position: relative;
+            width: 100%;
         }
     }
-    .cards-list > * {
-        display: block;
-        margin: 5px;
+    .panel {
+        text-align: left;
+        border: 1px solid #e0e0e0;
+        margin-top: 2em;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 12px 20px 20px;
+        border-radius: 6px;
+        background-color: #ffffff;
+        box-shadow: none;
+    }
+    .card {
+        .list {
+            margin-bottom: $margin-bottom;
+            border-bottom: 1px dotted #b7bcbf;
+            color: $blue-color;
+        }
+        .list ul {
+            padding-left: 20px;
+            list-style: none;
+        }
+        .list li * {
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: $margin-bottom;
+        }
+        .list li *:hover {
+            text-decoration: underline;
+        }
+        .title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .balance {
+            margin-bottom: 15px;
+            span {
+                font-size: 30px;
+                display: block;
+            }
+            .amount {
+                font-size: 40px;
+            }
+        }
     }
 }
