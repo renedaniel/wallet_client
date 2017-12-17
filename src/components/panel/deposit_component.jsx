@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DepositToAccount from './../../requests/tasks/deposit_to_account_task';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
-import { receiveCard } from './../../actions/card_action';
+import { receiveAmount } from './../../actions/account_action';
 import TaxInfo from './../panel/tax_component';
 import PropTypes from 'prop-types';
 
@@ -36,10 +36,10 @@ class DepositForm extends Component {
         try {
             const data = Util.encryptObject(this.state.form_data);
             const response = await Util.performSimpleRequest(DepositToAccount, { data });
-            //this.props.dispatch(receiveCard(response));
+            this.props.dispatch(receiveAmount(parseFloat(this.state.form_data.amount)));
             Util.sendInfo({
                 title: '¡Listo!',
-                message: 'Se ha agregado la tarjeta a tu cuenta'
+                message: 'Has depositado a tu cuenta'
             });
         } catch (errors) {
             console.log(errors);

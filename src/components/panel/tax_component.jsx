@@ -35,7 +35,7 @@ class TaxInfo extends PureComponent {
                     <p>Cantidad {Util.formatAmount(quantities.amount)}</p>
                     <p>Comisión {Util.formatAmount(quantities.percent)}</p>
                     <p>Tasa fija {Util.formatAmount(quantities.fixedRate)}</p>
-                    <p>Depositar {Util.formatAmount(quantities.total)}</p>
+                    <p>Total {Util.formatAmount(quantities.total)}</p>
                 </div>
             </div>
         )

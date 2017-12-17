@@ -3,18 +3,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BalanceCard from './../card/balance_card_component';
 import CardsCard from './../card/cards_card_component';
-import AddCard from './../panel/add_card_component';
-import DepositForm from './../panel/deposit_component';
+import AddCard from './add_card_component';
+import DepositForm from './deposit_component';
+import TransactionHistory from './transaction_history_component';
 
 class UserPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rightComponent: 'deposit'
+            rightComponent: 'history'
         }
         this.rightComponents = {
             'addCard': AddCard,
-            'deposit': DepositForm
+            'deposit': DepositForm,
+            'history': TransactionHistory
         }
         this.changeRightContent = this.changeRightContent.bind(this);
     }
