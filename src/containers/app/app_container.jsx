@@ -40,24 +40,30 @@ class App extends Component {
         if (!this.props.user) return null;
         return (
             <Router history={this.history} >
-                <div className={`app-container ${!this.props.user.is_logged ? 'home-container' : 'user-container'}`}>
-                    <header className={`app-header`}>
-                        <h1 className="app-title">My Wallet</h1>
-                    </header>
-                    <Nav user={this.props.user} />
-                    <Route render={({ location }) => {
-                        if (location.pathname === '/') {
-                            return this.props.user.is_logged ?
-                                <UserPanel user={this.props.user} /> :
-                                <Home />
-                        }
-                        return null;
-                    }} />
-                    <Route path="/singup" component={Register} />
-                    <Route path="/login" component={Login} />
-                    <Footer />
-                    <ModalContainer />
-                    <Spinner />
+                <div className="site-wrapper-inner">
+                    <div className="cover-container">
+                        <header className="masthead clearfix">
+                            <div className="inner">
+                                <h3 className="masthead-brand">MyWallet</h3>
+                                <Nav user={this.props.user} />
+                            </div>
+                        </header>
+                        <main role="main" className="inner cover">
+                            <Route render={({ location }) => {
+                                if (location.pathname === '/') {
+                                    return this.props.user.is_logged ?
+                                        <UserPanel /> :
+                                        <Home />
+                                }
+                                return null;
+                            }} />
+                        </main>
+                        <Route path="/singup" component={Register} />
+                        <Route path="/login" component={Login} />
+                        <Footer />
+                        <ModalContainer />
+                        <Spinner />
+                    </div>
                 </div>
             </Router>
         );

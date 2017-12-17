@@ -19,23 +19,15 @@ class Nav extends PureComponent {
     renderNavItem(label, to = '/', className = '', onClick = () => { }) {
         return (
             <NavLink
+                exact
                 key={label}
-                className={`nav-item noselect ${className}`}
+                className={`nav-link ${className}`}
                 to={to}
-                onClick={() => {
-                    onClick();
-                    this.toggleMenu();
-                }}
+                onClick={onClick}
             >
                 {label}
             </NavLink>
         )
-    }
-
-    toggleMenu() {
-        if (this.small_nav) {
-            this.small_nav.classList.toggle('small-nav-hidden');
-        }
     }
 
     render() {
@@ -49,16 +41,8 @@ class Nav extends PureComponent {
             options.push(this.renderNavItem('Registro', '/singup'));
         }
         return (
-            <nav className="nav">
-                <div className="full-nav">
-                    {options}
-                </div>
-                <div className="small-nav">
-                    <i class="mi mi-dehaze" onClick={() => this.toggleMenu()}/>
-                    <div className='small-nav-hidden small-links' ref={(div) => this.small_nav = div}>
-                        {options}
-                    </div>
-                </div>
+            <nav className="nav nav-masthead">
+                {options}
             </nav>
         );
     }

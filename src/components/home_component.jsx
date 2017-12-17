@@ -11,7 +11,7 @@ class Home extends PureComponent {
                     Los límites los pones tú
                 </h2>
                 <p>Wallet es una cartera en línea que te permite tener dinero electrónico de manera segura y confiable</p>
-                <a className='button'>¡Registrate ya!</a>
+                <button className="btn btn-lg btn-secondary">¡Registrate ya!</button>
             </section>
         )
     }

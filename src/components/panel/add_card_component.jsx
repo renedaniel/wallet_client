@@ -30,7 +30,12 @@ class AddCard extends Component {
             const card = Util.encryptObject(this.state.form_data);
             const response = await Util.performSimpleRequest(CardTask, { card });
             this.props.dispatch(receiveCard(response));
+            Util.sendInfo({
+                title: '¡Listo!',
+                message: 'Se ha agregado la tarjeta a tu cuenta'
+            });
         } catch (errors) {
+            console.log(errors);
             this.setState({ errors });
         }
     }
@@ -42,32 +47,25 @@ class AddCard extends Component {
         this.setState(newState);
     }
 
-    renderInput(key, type = 'text') {
+    renderInput(key, type = 'text', mb = 1) {
         const error = this.state.errors[key] && this.state.errors[key][0] || false;
         return (
-            <div className={`form-group ${error ? 'error' : ''}`}>
-                <input
-                    type={type}
-                    id={`${key}`}
-                    onChange={this.handleChange}
-                    value={this.state.form_data[key]}
-                    placeholder={Translator.get(`register_placeholder_${key}`)}
-                />
-                {error && <span className="error">{Translator.get(error)} </span>}
+            <div className="row">
+                {Util.renderInput(key, this.state[key], error, this.handleChange, type, mb)}
             </div>
         );
     }
 
     render() {
         return (
-            <div className='panel panel-add-card'>
+            <div className='container'>
                 <h1>Agrega tarjeta</h1>
-                <form onSubmit={this.handleSubmit} className="form">
+                <form className="container" onSubmit={this.handleSubmit}>
                     {this.renderInput('card_number')}
                     {this.renderInput('full_name')}
                     {this.renderInput('expiration')}
-                    {this.renderInput('cvc', 'password')}
-                    <button className="button button-info">Enviar</button>
+                    {this.renderInput('cvc')}
+                    <button className="btn btn-primary mt-2" type="submit">Enviar</button>
                 </form>
             </div>
         )

@@ -1,19 +1,21 @@
-import './styles/panel.css';
-import React, { PureComponent } from 'react';
+import './styles/user.css';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BalanceCard from './../card/balance_card_component';
 import CardsCard from './../card/cards_card_component';
 import AddCard from './../panel/add_card_component';
 
-class UserPanel extends PureComponent {
+class UserPanel extends Component {
     render() {
         return (
-            <div className='panel user-panel'>
-                <div className='left-side'>
-                    <BalanceCard />
-                    <CardsCard cards={this.props.user.cards} />
+            <div className='row'>
+                <div className='col col-sm-12 col-lg-5'>
+                    <div className='row'>
+                        <BalanceCard />
+                        <CardsCard />
+                    </div>
                 </div>
-                <div className='right-side'>
+                <div className='col col-sm-12 col-lg-7'>
                     <AddCard />
                 </div>
             </div>
@@ -22,15 +24,11 @@ class UserPanel extends PureComponent {
 }
 
 UserPanel.propTypes = {
-    user: PropTypes.shape({
-        cards: PropTypes.array
-    }),
+    user: PropTypes.object,
 }
 
 UserPanel.defaultProps = {
-    user: {
-        cards: []
-    }
+    user: { }
 }
 
 export default UserPanel;

@@ -1,4 +1,3 @@
-//import './styles/Login.css';
 import React, { Component } from 'react';
 import LoginTask from './../../requests/tasks/login_task';
 import Translator from './../../utils/translator';
@@ -27,9 +26,13 @@ class Login extends Component {
             const auth = this.state.form_data
             const response = await Util.performSimpleRequest(LoginTask, { auth });
             localStorage.setItem("jwt", response.jwt);
-            window.location = '/register';
+            window.location = '/';
         } catch (errors) {
-            this.setState({ errors });
+            //TODO client validations
+            Util.sendError({
+                title: 'Usuario inválido',
+                message: 'Por favor verfica tu información',
+            });
         }
     }
 
@@ -40,24 +43,18 @@ class Login extends Component {
         this.setState(newState);
     }
 
-    renderInput(key, type = 'text') {
-        const error = this.state.errors[key] && this.state.errors[key][0] || false;
-        return (
-            <div>
-                <input type={type} id={`${key}`} onChange={this.handleChange} value={this.state.form_data[key]} />
-                {error && <span>{Translator.get(error)} </span>}
-            </div>
-        );
-    }
-
     render() {
         return (
-            <div className='Login'>
-                <h1>Login</h1>
-                <form onSubmit={this.handleSubmit} className="form">
-                    {this.renderInput('email')}
-                    {this.renderInput('password', 'password')}
-                    <button>Enviar</button>
+            <div className='container'>
+                <h1>¡Inicia tu sesión!</h1>
+                <form className="container" onSubmit={this.handleSubmit}>
+                    <div className="row">
+                        {Util.renderInput('email', this.state.email, false, this.handleChange)}
+                    </div>
+                    <div className="row">
+                        {Util.renderInput('password', this.state.password, false, this.handleChange, 'password')}
+                    </div>
+                    <button className="btn btn-primary" type="submit">Enviar</button>
                 </form>
             </div>
         )

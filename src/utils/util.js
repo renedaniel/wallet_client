@@ -1,6 +1,9 @@
 import Request from './../requests/request_manager';
 import Encryptor from 'jsencrypt';
 import config from './../config/app_config';
+import Notification from 'izitoast';
+import React from 'react';
+import Translator from './translator';
 
 class Util {
     static async performSimpleRequest(Task, params = {}) {
@@ -15,6 +18,50 @@ class Util {
                 reject(error);
             });
         }
+    }
+
+    static renderInput(key, value, error = false, onChange = () => { }, type = 'text', mb = 5, size = '12') {
+        return (
+            <div className={`col-md-${size} mb-${mb}`}>
+                <label htmlFor={`${key}`}>{Translator.get(`label_${key}`)}</label>
+                <input
+                    type={type}
+                    id={`${key}`}
+                    onChange={onChange}
+                    value={value}
+                    className={`form-control ${error ? 'is-invalid' : ''}`}
+                />
+                {error &&
+                    <div className="invalid-feedback">
+                        {Translator.get(error)}
+                    </div>
+                }
+            </div>
+        );
+    }
+
+    static sendError(options = {}) {
+        const config = Object.assign({
+            title: 'Error',
+            message: 'Intenta de nuevo',
+            position: 'topCenter',
+            backgroundColor: '',
+            theme: 'light',
+            color: 'red',
+        }, options);
+        Notification.show(config);
+    }
+
+    static sendInfo(options = {}) {
+        const config = Object.assign({
+            title: 'Éxito',
+            message: 'Lo has logrado',
+            position: 'topCenter',
+            backgroundColor: '',
+            theme: 'light',
+            color: '',
+        }, options);
+        Notification.show(config);
     }
 
     static encrypt(secret = '') {
