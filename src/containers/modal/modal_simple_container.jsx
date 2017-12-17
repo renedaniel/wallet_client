@@ -14,7 +14,9 @@ class ModalSimple extends PureComponent {
                 className={`modal-button ${class_name} ${button.selected ? 'selected' : ''}`}
                 key={button.content}
                 onClick={() => {
-                    button.onClick();
+                    if (typeof button.onClick === 'function') {
+                        button.onClick();
+                    }
                     this.props.dispatch({ type: HIDE_MODAL });
                 }}
             >

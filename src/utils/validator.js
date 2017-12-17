@@ -9,6 +9,13 @@ class Validator {
         return regex.test(email);
     }
 
+    static setError(key, data, validation, message, errors = {}) {
+        if (!validation(data)) {
+            errors[key] = message;
+        }
+        return errors;
+    }
+
 }
 
 export default Validator;
