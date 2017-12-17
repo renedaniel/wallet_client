@@ -44,7 +44,7 @@ class App extends Component {
                     <div className="cover-container">
                         <header className="masthead clearfix">
                             <div className="inner">
-                                <h3 className="masthead-brand">MyWallet</h3>
+                                <h3 className="masthead-brand">Wallet</h3>
                                 <Nav user={this.props.user} />
                             </div>
                         </header>

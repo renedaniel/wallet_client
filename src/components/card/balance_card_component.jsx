@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const BalanceCard = (props) => {
     return (
@@ -11,11 +12,19 @@ const BalanceCard = (props) => {
                 <h6 className='card-subtitle mb-2 text-muted'>{`$${props.user.account.balance}`}</h6 >
                 <a href="#" className="card-link">Historial</a>
                 <a href="#" className="card-link">Retirar</a>
-                <a href="#" className="card-link">Recargar</a>
+                <a href="#" onClick={() => props.onSelectOption('deposit')} className="card-link">Recargar</a>
                 <a href="#" className="card-link">Transferir</a>
             </div>
         </div>
     )
+}
+
+BalanceCard.propTypes = {
+    onSelectOption: PropTypes.func
+}
+
+BalanceCard.defaultProps = {
+    onSelectOption: () => { }
 }
 
 const mapStateToProps = state => ({ user: state.user });

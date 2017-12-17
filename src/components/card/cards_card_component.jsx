@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteCard } from './../../actions/card_action';
 import { showModal, MODAL_SIMPLE } from './../../actions/modal_action';
-import { showLoader, hideLoader } from './../../actions/spinner_action';
 import PropTypes from 'prop-types';
 import DeleteCardTask from './../../requests/tasks/delete_card_task';
 import Util from './../../utils/util';
@@ -69,15 +68,18 @@ class CardsCard extends PureComponent {
         this.props.showModal({
             modalType: MODAL_SIMPLE,
             modalProps: {
-                content: '¿Estás seguro?',
+                content: '¿Estás seguro de querer eliminar la tarjeta?',
                 buttons: [
                     {
-                        content: 'Si',
+                        content: 'Eliminar',
                         selected: true,
                         onClick: () => {
-                            this.props.showLoader();
-                            this.deleteCard(card_id, this.props.hideLoader);
+                            this.deleteCard(card_id);
                         }
+                    },
+                    {
+                        content: 'Cancelar',
+                        selected: true
                     }
                 ]
             }
@@ -94,10 +96,9 @@ class CardsCard extends PureComponent {
                             <ul className="list-group">
                                 {
                                     this.state.chunk.map(card => {
-                                        console.error(card.id, 'id');
                                         return (
                                             <li key={card.id} className="list-group-item justify-content-between">
-                                                {`Terminación ${card.number_mask}`}
+                                                {`X - ${card.number_mask}`}
                                                 <span onClick={e => { this.handleDelete(card.id) }} className="badge badge-default badge-pill">
                                                     <i className="fa fa-trash danger" aria-hidden="true" />
                                                 </span>
@@ -116,7 +117,9 @@ class CardsCard extends PureComponent {
                         </div> :
                         <h6 className='card-subtitle mb-2 text-muted'>No tienes tarjetas registradas</h6 >
                     }
-                    <span><a>Agregar tarjeta</a></span>
+                    <button onClick={() => this.props.onSelectOption('addCard')} className="btn btn-md mb-3 btn-info">
+                        Agregar tarjeta
+                    </button>
                 </div>
             </div>
         )
@@ -126,19 +129,19 @@ class CardsCard extends PureComponent {
 
 CardsCard.propTypes = {
     cards: PropTypes.array,
-    itemsPage: PropTypes.number
+    itemsPage: PropTypes.number,
+    onSelectOption: PropTypes.func,
 }
 
 CardsCard.defaultProps = {
     cards: [],
-    itemsPage: 4
+    itemsPage: 4,
+    onSelectOption: () => { }
 }
 
 const mapStateToProps = state => ({ cards: state.cards });
 const mapDispatchToProps = dispatch => bindActionCreators({
     showModal,
-    showLoader,
-    hideLoader,
     deleteCard
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(CardsCard);

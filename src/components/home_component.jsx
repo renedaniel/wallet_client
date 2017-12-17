@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
+import Translator from './../utils/translator';
 
 class Home extends PureComponent {
     render() {
@@ -11,7 +13,12 @@ class Home extends PureComponent {
                     Los límites los pones tú
                 </h2>
                 <p>Wallet es una cartera en línea que te permite tener dinero electrónico de manera segura y confiable</p>
-                <button className="btn btn-lg btn-secondary">¡Registrate ya!</button>
+                <Link
+                    to="/singup"
+                    className="btn btn-lg btn-secondary"
+                >
+                    {Translator.get('home_singup_button', '¡Registrate ya!')}
+                </Link>
             </section>
         )
     }

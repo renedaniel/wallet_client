@@ -4,16 +4,26 @@ import config from './../config/app_config';
 import Notification from 'izitoast';
 import React from 'react';
 import Translator from './translator';
+import store from './../store';
+import { showLoader, hideLoader } from './../actions/spinner_action';
 
 class Util {
+    static formatAmount(amount) {
+        const float = parseFloat(amount);
+        return `$${float.toFixed(2)}`;
+    }
+
     static async performSimpleRequest(Task, params = {}) {
         try {
+            store.dispatch(showLoader());
             const task = new Task(params);
             const response = await Request.addRequest(task);
+            store.dispatch(hideLoader());
             return new Promise((resolve, reject) => {
                 resolve(response);
             });
         } catch (error) {
+            store.dispatch(hideLoader());
             return new Promise((resolve, reject) => {
                 reject(error);
             });
@@ -23,17 +33,18 @@ class Util {
     static renderInput(key, value, error = false, onChange = () => { }, type = 'text', mb = 5, size = '12') {
         return (
             <div className={`col-md-${size} mb-${mb}`}>
-                <label htmlFor={`${key}`}>{Translator.get(`label_${key}`)}</label>
+                <label htmlFor={`${key}`}>{Translator.get(`label_form_${key}`)}</label>
                 <input
                     type={type}
                     id={`${key}`}
                     onChange={onChange}
                     value={value}
                     className={`form-control ${error ? 'is-invalid' : ''}`}
+                    placeholder={Translator.get(`ph_form_${key}`)}
                 />
                 {error &&
                     <div className="invalid-feedback">
-                        {Translator.get(error)}
+                        {Array.isArray(error) ? Translator.get(error[0]) : Translator.get(error)}
                     </div>
                 }
             </div>

@@ -164,3 +164,29 @@ body {
 .danger {
   color: red;
 }
+
+form {
+  text-align: left;
+}
+
+.btn-primary {
+  text-decoration: none;
+  border-radius: 25px;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 3px #fff;
+  color: white;
+}
+
+.btn-info {
+  border-radius: 25px;
+  background-color: #0070ba;
+  background-image: linear-gradient(100deg, #0070ba, #1546a0);
+}
+
+.card-link {
+  color: #0070ba;
+}
+
+.card-link:hover {
+  color: #333;
+}
