@@ -1,6 +1,5 @@
 import './app.css';
-import './../../assets/notification.css';
-import './../../assets/icons.css';
+import './notification.css';
 import {
     Router,
     Route
