@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DepositToAccount from './../../requests/tasks/deposit_to_account_task';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
+import Validator from './../../utils/validator';
 import { receiveAmount } from './../../actions/account_action';
 import TaxInfo from './../panel/tax_component';
 import PropTypes from 'prop-types';
@@ -31,8 +32,18 @@ class DepositForm extends Component {
         this.setState({ form_data });
     }
 
+    getErrors() {
+        const errors = {}
+        const { amount } = this.state.form_data;
+        Validator.setError('amount', amount, Validator.isNotEmpty, 'Debes ingresar una cantidad', errors);
+        Validator.setError('amount', amount, Validator.isValidAmount, 'Debes ingresar una cantidad válida', errors);
+        return Object.keys(errors).length ? errors : false;
+    }
+
     async handleSubmit(e) {
         e.preventDefault();
+        const errors = this.getErrors();
+        if (errors) return this.setState({ errors });
         try {
             const data = Util.encryptObject(this.state.form_data);
             const response = await Util.performSimpleRequest(DepositToAccount, { data });
@@ -42,7 +53,6 @@ class DepositForm extends Component {
                 message: 'Has depositado a tu cuenta'
             });
         } catch (errors) {
-            console.log(errors);
             this.setState({ errors });
         }
     }
@@ -55,7 +65,7 @@ class DepositForm extends Component {
     }
 
     renderInput(key, type = 'text', mb = 1) {
-        const error = this.state.errors[key] && this.state.errors[key][0] || false;
+        const error = this.state.errors[key];
         return (
             <div className="row">
                 {Util.renderInput(key, this.state[key], error, this.handleChange, type, mb)}
@@ -117,7 +127,6 @@ DepositForm.propTypes = {
 DepositForm.defaultProps = {
     onSelectOption: () => { }
 }
-
 
 const mapStateToProps = state => ({ cards: state.cards });
 export default connect(mapStateToProps)(DepositForm);

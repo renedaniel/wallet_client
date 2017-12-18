@@ -37,7 +37,7 @@ class UserPanel extends Component {
             <div className='row'>
                 <div className='col col-sm-12 col-lg-5'>
                     <div className='row'>
-                        <BalanceCard onSelectOption={this.changeRightContent} />
+                        <BalanceCard currentPanel={this.state.rightComponent} onSelectOption={this.changeRightContent} />
                         <CardsCard onSelectOption={this.changeRightContent} />
                     </div>
                 </div>

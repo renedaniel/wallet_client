@@ -5,6 +5,7 @@ import Translator from './../../utils/translator';
 import Util from './../../utils/util';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 
 class TransactionHistory extends Component {
 
@@ -55,47 +56,47 @@ class TransactionHistory extends Component {
             return (
                 <div className="row text-center">
                     <div className="col-sm-12 mt-10">
-                        <h4>No has realizado ninguna acción con tu cuenta</h4>
+                        <h4>No has utilizado tu cuenta</h4>
                         <p>Ve a recargar para comenzar</p>
+                        <button onClick={() => this.props.onSelectOption('deposit')} className="btn-lg">¡Recargar!</button>
                     </div>
                 </div>
             )
         }
         return (
-            <div className='container'>
-                <h1>Tu Historial</h1>
-                <table className="table table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Accion</th>
-                            <th>Destinatario</th>
-                            <th>Tarjeta</th>
-                            <th>Cantidad</th>
-                            <th>Comisión</th>
-                            <th>Total</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div className=''>
+                <Table className="table table-responsive">
+                    <Thead>
+                        <Tr>
+                            <Th>Accion</Th>
+                            <Th>Destinatario</Th>
+                            <Th>Tarjeta</Th>
+                            <Th>Cantidad</Th>
+                            <Th>Comisión</Th>
+                            <Th>Total</Th>
+                            <Th>Fecha</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
                         {
                             this.state.chunk.map(transaction => {
                                 const { transaction_type, amount, total, fixed_rate, commission_amount, bank_account, created_at, account_number, card_mask } = transaction;
                                 const commission = commission_amount + fixed_rate;
                                 return (
-                                    <tr>
-                                        <td>{transaction_type}</td>
-                                        <td>{bank_account ? bank_account : account_number}</td>
-                                        <td>{card_mask}</td>
-                                        <td>{amount}</td>
-                                        <td>{commission}</td>
-                                        <td>{total}</td>
-                                        <td>{new Date(created_at).toISOString().substring(0, 10)}</td>
-                                    </tr>
+                                    <Tr key={transaction.id}>
+                                        <Td>{transaction_type}</Td>
+                                        <Td>{bank_account ? bank_account : account_number}</Td>
+                                        <Td>{card_mask}</Td>
+                                        <Td>{amount}</Td>
+                                        <Td>{commission}</Td>
+                                        <Td>{total}</Td>
+                                        <Td>{new Date(created_at).toISOString().substring(0, 10)}</Td>
+                                    </Tr>
                                 )
                             })
                         }
-                    </tbody>
-                </table>
+                    </Tbody>
+                </Table>
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.props.itemsPage}

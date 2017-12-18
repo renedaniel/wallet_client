@@ -5,6 +5,7 @@ import Validator from './../../utils/validator';
 import Translator from './../../utils/translator';
 import Util from './../../utils/util';
 import { receiveCard } from './../../actions/card_action';
+import PropTypes from 'prop-types';
 
 class AddCard extends Component {
 
@@ -59,6 +60,7 @@ class AddCard extends Component {
                 title: '¡Listo!',
                 message: 'Se ha agregado la tarjeta a tu cuenta'
             });
+            this.props.onSelectOption('deposit');
         } catch (errors) {
             this.setState({ errors });
         }
@@ -131,4 +133,11 @@ class AddCard extends Component {
     }
 }
 
+AddCard.propTypes = {
+    onSelectOption: PropTypes.func
+}
+
+AddCard.defaultProps = {
+    onSelectOption: () => { }
+}
 export default connect()(AddCard);

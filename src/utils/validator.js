@@ -9,6 +9,11 @@ class Validator {
         return regex.test(email);
     }
 
+    static isValidAmount(quantity = '') {
+        const amount = parseFloat(quantity);
+        return !isNaN(amount);
+    }
+
     static setError(key, data, validation, message, errors = {}) {
         if (!validation(data)) {
             errors[key] = message;

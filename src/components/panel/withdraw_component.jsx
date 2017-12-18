@@ -28,6 +28,7 @@ class DepositForm extends Component {
         const errors = {}
         const { amount, bank_account } = this.state.form_data;
         Validator.setError('amount', amount, Validator.isNotEmpty, 'Debes ingresar una cantidad', errors);
+        Validator.setError('amount', amount, Validator.isValidAmount, 'Debes ingresar una cantidad válida', errors);
         Validator.setError('bank_account', bank_account, Validator.isNotEmpty, 'Debes ingresar el número de cuenta', errors);
         return Object.keys(errors).length ? errors : false;
     }
