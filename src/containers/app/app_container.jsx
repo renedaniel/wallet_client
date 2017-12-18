@@ -32,6 +32,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        if (process.env.NODE_ENV === 'test') return // TODO 171121: https://github.com/facebookincubator/create-react-app/issues/3482
         this.props.fetchIsLoggedIn();
     }
 
@@ -47,7 +48,7 @@ class App extends Component {
                                 <Nav user={this.props.user} />
                             </div>
                         </header>
-                        <main role="main" className="inner cover">
+                        <main role="main" className="inner cover content">
                             <Route render={({ location }) => {
                                 if (location.pathname === '/') {
                                     return this.props.user.is_logged ?

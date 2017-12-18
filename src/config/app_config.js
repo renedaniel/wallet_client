@@ -1,7 +1,7 @@
 
 function getAppConfig() {
     //TODO: Fix heroku deploy, why can´t change to production env??
-    const end_point = process.env.NODE_ENV !== 'production' ? 'http://0.0.0.0:3000/api' : 'https://stormy-earth-34581.herokuapp.com/api';
+    const end_point = 'https://stormy-earth-34581.herokuapp.com/api';
     return {
         end_point,
         api_version: "v1",
