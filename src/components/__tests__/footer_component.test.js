@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Spinner from './../spinner_container';
+import Footer from './../footer_component';
 import { Provider } from 'react-redux';
-import store from './../../../store';
+import store from './../../store';
 
 const wrapper = mount(
     <Provider store={store} >
-            <Spinner  />
+            <Footer  />
     </Provider>
 );
 

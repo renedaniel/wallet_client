@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Spinner from './../spinner_container';
+import BalanceCard from './../balance_card_component';
 import { Provider } from 'react-redux';
 import store from './../../../store';
 
 const wrapper = mount(
     <Provider store={store} >
-            <Spinner  />
+            <BalanceCard  />
     </Provider>
 );
 

@@ -14,3 +14,5 @@ const wrapper = mount(
 it('renders without crashing', () => {
     expect(wrapper);
 });
+
+//TODO more assertions
