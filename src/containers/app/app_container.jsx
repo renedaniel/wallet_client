@@ -36,6 +36,7 @@ class App extends Component {
     }
 
     render() {
+        console.error('RDGV', process.env.NODE_ENV, process.env);
         if (!this.props.user) return null;
         return (
             <Router history={this.history} >

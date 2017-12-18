@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DepositToAccount from './../../requests/tasks/deposit_to_account_task';
-import Translator from './../../utils/translator';
 import Util from './../../utils/util';
 import Validator from './../../utils/validator';
 import { receiveAmount } from './../../actions/account_action';
