@@ -6,17 +6,21 @@ import CardsCard from './../card/cards_card_component';
 import AddCard from './add_card_component';
 import DepositForm from './deposit_component';
 import TransactionHistory from './transaction_history_component';
+import Withdraw from './withdraw_component';
+import TransferForm from './transfer_component';
 
 class UserPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rightComponent: 'history'
+            rightComponent: 'deposit'
         }
         this.rightComponents = {
             'addCard': AddCard,
             'deposit': DepositForm,
-            'history': TransactionHistory
+            'history': TransactionHistory,
+            'withdraw': Withdraw,
+            'transfer': TransferForm
         }
         this.changeRightContent = this.changeRightContent.bind(this);
     }

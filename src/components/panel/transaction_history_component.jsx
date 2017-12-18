@@ -51,7 +51,7 @@ class TransactionHistory extends Component {
 
     render() {
         if (this.state.isLoading) return null;
-        if (!this.state.transactions) {
+        if (!this.state.transactions.length) {
             return (
                 <div className="row text-center">
                     <div className="col-sm-12 mt-10">

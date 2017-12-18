@@ -20,7 +20,7 @@ class AddCard extends Component {
                 full_name: '',
                 month: this.expiration_metadata.months[0],
                 year: this.expiration_metadata.years[0],
-                cvc: 'cvc'
+                cvc: ''
 
             },
             errors: {}

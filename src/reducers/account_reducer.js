@@ -10,7 +10,7 @@ function reducer(state = {}, action = {}) {
         case RECEIVE_AMOUNT:
             const amount = action.amount;
             const balance = state.balance + amount;
-            return { ...action.account, balance }
+            return { ...state, balance }
         default:
             return state;
     }

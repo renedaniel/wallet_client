@@ -13,6 +13,27 @@ class Util {
         return `$${float.toFixed(2)}`;
     }
 
+    static calcTax(amount) {
+        amount = parseFloat(amount);
+        let fixedRate = 0;
+        let percent = 0;
+        if (amount <= 1000) {
+            fixedRate = 8;
+            percent = amount * 0.03;
+        } else if (amount > 1000 && amount <= 5000) {
+            fixedRate = 6;
+            percent = amount * 0.025;
+        } else if (amount > 5000 && amount <= 10000) {
+            fixedRate = 4;
+            percent = amount * 0.02;
+        } else if (amount > 10000) {
+            fixedRate = 3;
+            percent = amount * 0.01;
+        }
+        const total = amount + percent + fixedRate;
+        return { amount, percent, fixedRate, total }
+    }
+
     static async performSimpleRequest(Task, params = {}) {
         try {
             store.dispatch(showLoader());
