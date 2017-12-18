@@ -78,8 +78,7 @@ class CardsCard extends PureComponent {
                         }
                     },
                     {
-                        content: 'Cancelar',
-                        selected: true
+                        content: 'Cancelar'
                     }
                 ]
             }

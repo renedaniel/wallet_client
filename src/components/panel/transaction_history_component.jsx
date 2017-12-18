@@ -87,9 +87,9 @@ class TransactionHistory extends Component {
                                         <Td>{transaction_type}</Td>
                                         <Td>{bank_account ? bank_account : account_number}</Td>
                                         <Td>{card_mask}</Td>
-                                        <Td>{amount}</Td>
-                                        <Td>{commission}</Td>
-                                        <Td>{total}</Td>
+                                        <Td>{Util.formatAmount(amount)}</Td>
+                                        <Td>{Util.formatAmount(commission)}</Td>
+                                        <Td>{Util.formatAmount(total)}</Td>
                                         <Td>{new Date(created_at).toISOString().substring(0, 10)}</Td>
                                     </Tr>
                                 )
